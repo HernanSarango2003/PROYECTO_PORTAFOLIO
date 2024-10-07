@@ -1,5 +1,4 @@
 {% load static %}
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-black">
   <div class="container">
     <a class="navbar-brand fw-bold fst-italic" href="/">H.S</a>
@@ -8,21 +7,25 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item d-flex align-items-center">
-                <a class="btn btn-primary btn-sm me-2" href="{% url 'blog:posts' %}">Blog</a>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-                <a class="btn btn-primary btn-sm me-2" href="{% static 'portfolio/cvHernán.pdf' %}" target="_blank">Download CV</a>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-                <a class="btn btn-primary btn-sm me-2" href="{% url 'blog:posts' %}">Curso</a>
-            </li>
-        </ul>
-    </div>
-    
-          </li>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'blog:posts' %}">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'signout' %}">cerrar sesión</a>
+        </li>
+        <li class="nav-item d-flex align-items-center">
+          <a class="btn btn-primary btn-sm" href="{% static 'portfolio/cv.pdf' %}" target="_blank">Download CV</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'signin' %}">iniciar sesión</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>
